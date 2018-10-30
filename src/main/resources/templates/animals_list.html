@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animal Shelter Manager</title>
+</head>
+<body>
+
+    <div align="center" >
+        <a th:href="@{__${T(com.patrycja.util.Mappings).ADD_ANIMAL}__}">Add new animal to database.</a>
+
+        <table border="1" cellpadding="5">
+            <caption><h2>Animals in the Shelter</h2></caption>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:block th:each="animal : ${animalData.animals}">
+
+                <td th:text="${animal.name}"></td>
+                <td th:text="${animal.type}"></td>
+                <td><a href="#" th:href="@{'/viewAnimal/' + ${animal.id}}">View</a></td>
+                <td><a href="#" th:href="@{'/addAnimal/' + ${animal.id}}">Edit</a></td>
+                <td><a href="#" th:href="@{'/deleteAnimal/' + ${animal.id}}">Delete</a></td>
+
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -10,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -31,14 +28,15 @@ public class AnimalController {
         return animalService.getData();
     }
 
-    // http://localhost:8080/animal-shelter-manager-3.0/animals
+
     @GetMapping(Mappings.ANIMALS)
     public String animals() {
         return ViewNames.ANIMALS_LIST;
     }
 
-    @GetMapping(Mappings.ADD_ANIMAL)
-    public String addEditAnimal(@RequestParam(required = false, defaultValue = "-1") int id, Model model) {
+
+    @RequestMapping("/"+Mappings.ADD_ANIMAL+"/{id}")
+    public String addEditAnimal(@PathVariable(required = false) int id, Model model) {
 
         log.info("Editing id = {}", id);
         Animal animal = animalService.getAnimal(id);
@@ -61,14 +59,14 @@ public class AnimalController {
         return "redirect:/" + Mappings.ANIMALS;
     }
 
-    @GetMapping(Mappings.DELETE_ANIMAL)
-    public String deleteAnimal(@RequestParam int id) {
+    @RequestMapping("/" + Mappings.DELETE_ANIMAL + "/{id}")
+    public String deleteAnimal(@PathVariable int id) {
         animalService.removeAnimal(id);
         return "redirect:/" + Mappings.ANIMALS;
     }
 
-    @GetMapping(Mappings.VIEW_ANIMAL)
-    public String viewAnimal(@RequestParam int id, Model model) {
+    @RequestMapping("/"+ Mappings.VIEW_ANIMAL+"/{id}")
+    public String viewAnimal(@PathVariable int id, Model model) {
         Animal animal = animalService.getAnimal(id);
         model.addAttribute(AttributeNames.ANIMAL, animal);
         return ViewNames.VIEW_ANIMAL;

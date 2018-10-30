@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="animal-shelter-manager-3.0" />
+        <module name="animal-shelter-manager-4.0" />
       </profile>
     </annotationProcessing>
   </component>
