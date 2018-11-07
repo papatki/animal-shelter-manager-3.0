@@ -35,26 +35,32 @@ public class AnimalController {
     }
 
 
-    @RequestMapping("/"+Mappings.ADD_ANIMAL+"/{id}")
-    public String addEditAnimal(@PathVariable(required = false) int id, Model model) {
-
-        log.info("Editing id = {}", id);
-        Animal animal = animalService.getAnimal(id);
-
-        if (animal == null) {
-            animal = new Animal("", "", "");
-        }
-        model.addAttribute(AttributeNames.ANIMAL, animal);
+    @RequestMapping(Mappings.ADD_ANIMAL)
+    public String addAnimal(Model model) {
+        model.addAttribute(AttributeNames.ANIMAL, new Animal("","",""));
         return ViewNames.ADD_ANIMAL;
+
     }
 
-    @PostMapping(Mappings.ADD_ANIMAL)
-    public String processAnimal(@ModelAttribute(AttributeNames.ANIMAL) Animal animal) {
-        if (animal.getId() == 0) {
-            animalService.addAnimal(animal);
-        } else {
-            animalService.updateAnimal(animal);
-        }
+    @RequestMapping(value = Mappings.ADD_ANIMAL, method = RequestMethod.POST)
+    public String processAnimal(Animal animal) {
+        animalService.addAnimal(animal);
+
+        return "redirect:/" + Mappings.ANIMALS;
+    }
+
+
+
+    @RequestMapping("/" + Mappings.EDIT_ANIMAL + "/{id}")
+    public String editAnimal(@PathVariable int id, Model model){
+        Animal animal = animalService.getAnimal(id);
+        model.addAttribute(AttributeNames.ANIMAL,animal);
+        return ViewNames.EDIT_ANIMAL;
+    }
+
+    @RequestMapping(value = Mappings.EDIT_ANIMAL, method = RequestMethod.POST)
+    public String updateAnimal(Animal animal) {
+        animalService.updateAnimal(animal);
 
         return "redirect:/" + Mappings.ANIMALS;
     }

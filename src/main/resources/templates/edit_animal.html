@@ -6,7 +6,7 @@
 </head>
 <body>
     <div align="center">
-        <form  th:action="@{__${T(com.patrycja.util.Mappings).ADD_ANIMAL}__}" th:object="${animal}" method="POST">
+        <form  th:action="@{__${T(com.patrycja.util.Mappings).EDIT_ANIMAL}__}" th:object="${animal}" method="POST">
             <input type="hidden" th:field="*{id}" />
             <table>
                 <tr>

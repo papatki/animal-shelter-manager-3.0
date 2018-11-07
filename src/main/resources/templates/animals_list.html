@@ -23,7 +23,7 @@
                 <td th:text="${animal.name}"></td>
                 <td th:text="${animal.type}"></td>
                 <td><a href="#" th:href="@{'/viewAnimal/' + ${animal.id}}">View</a></td>
-                <td><a href="#" th:href="@{'/addAnimal/' + ${animal.id}}">Edit</a></td>
+                <td><a href="#" th:href="@{'/editAnimal/' + ${animal.id}}">Edit</a></td>
                 <td><a href="#" th:href="@{'/deleteAnimal/' + ${animal.id}}">Delete</a></td>
 
             </tr>

@@ -6,6 +6,7 @@ public final class ViewNames {
     public static final String ADD_ANIMAL = "add_animal";
     public static final String HOME = "home";
     public static final String VIEW_ANIMAL = "view_animal";
+    public static final String EDIT_ANIMAL = "edit_animal";
 
     private ViewNames() {}
 }
